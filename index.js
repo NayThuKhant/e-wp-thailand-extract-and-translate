@@ -1,7 +1,7 @@
 const puppeteer = require('puppeteer')
 const translate = require('@iamtraction/google-translate')
 
-async function extractAndTranslate(url) {
+async function extractInformation(url) {
   const browser = await puppeteer.launch()
   const page = await browser.newPage()
 
@@ -22,36 +22,8 @@ async function extractAndTranslate(url) {
     return information
   })
 
-  const translatedInformation = {}
-  for (const key in information) {
-    let translatedKey = key
-    let translatedValue = information[key]
-
-    /*Note
-		Translating key via google translate may result in different responses and applicatin relying on this key will be brokens
-
-		await translate(key, { to: 'en' })
-		.then((res) => {
-			translatedKey = res.text
-		})
-		.catch((err) => {
-			console.error(err)
-		})
-	*/
-
-    await translate(information[key], { to: 'en' })
-      .then((res) => {
-        translatedValue = res.text
-      })
-      .catch((err) => {
-        console.error(err)
-      })
-
-    translatedInformation[translatedKey] = translatedValue
-  }
-
   await browser.close()
-  return translatedInformation
+  return information
 }
 
 async function run() {
@@ -61,8 +33,15 @@ async function run() {
     process.exit(1)
   }
 
-  const result = await extractAndTranslate(url)
-  console.log(JSON.stringify(result))
+  const extractedInformation = await extractInformation(url)
+
+  translate(JSON.stringify(extractedInformation), { to: 'en' })
+    .then((res) => {
+      console.debug(res.text)
+    })
+    .catch((err) => {
+      console.error(err)
+    })
 }
 
 run()

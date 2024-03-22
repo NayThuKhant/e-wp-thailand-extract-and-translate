@@ -8,9 +8,8 @@
 	"engines": {
 		"node": ">=18"
 	},
-	"description": "Project to extract & translate employee information from Thailand Workpermit Website (https://e-workpermit.doe.go.th)",
+	"description": "Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)",
 	"main": "index.js",
-	"devDependencies": {},
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},

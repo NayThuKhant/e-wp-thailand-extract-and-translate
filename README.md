@@ -2,7 +2,7 @@
 
 ### REQUIREMENTS
 
-- Node.js ^18
+- Node.js ^14
 
 ### INSTALLATION
 

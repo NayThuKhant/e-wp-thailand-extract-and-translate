@@ -7,7 +7,7 @@
 ### INSTALLATION
 
 ```bash
-  npm i -g e-workpermit-thailand-extractor
+npm i -g e-workpermit-thailand-extractor
 ```
 
 ### USAGE
@@ -17,9 +17,9 @@
   - Global
 
     ```bash
-      e-workpermit-thailand-extractor --help
+    e-workpermit-thailand-extractor --help
 
-      e-workpermit-thailand-extractor [url] [to] --string
+    e-workpermit-thailand-extractor [url] [to] --string
     ```
 
   - Execute CLI using PHP
@@ -29,6 +29,14 @@
     $originalInformation = json_decode($output['originalInformation'], true);
     $translatedInformation = json_decode($output['translatedInformation'], true);
     ```
+
+- Node
+
+  ```nodejs
+  const ExtractAndTranslateContent = require('./ExtractAndTranslateContent')
+
+  const information = await new ExtractAndTranslateContent(url,to).process()
+  ```
 
 ### SAMPLE OUTPUT
 

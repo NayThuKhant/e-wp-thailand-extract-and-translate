@@ -6,7 +6,7 @@
     "commander": "^12.0.0"
   },
   "name": "e-workpermit-thailand-extractor",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "engines": {
     "node": ">=14"
   },

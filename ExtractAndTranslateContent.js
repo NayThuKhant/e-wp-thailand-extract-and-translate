@@ -3,7 +3,7 @@ const cheerio = require('cheerio')
 const translate = require('@iamtraction/google-translate')
 
 class ExtractAndTranslateContent {
-  information = {}
+  originalInformation = {}
   translatedInformation = {}
 
   constructor(url, to) {
@@ -26,8 +26,8 @@ class ExtractAndTranslateContent {
     await this.translate()
 
     return {
-      originalInformation: this.translatedInformation,
-      translatedInformation: this.translatedInformation,
+      originalInformation: this.originalInformation,
+      translatedInformation: this.translatedInformation
     }
   }
 
@@ -37,11 +37,11 @@ class ExtractAndTranslateContent {
       const html = response.data
       const $ = cheerio.load(html)
 
-      $('td.pe-3').each((index, element) => {
+      $('td.pe-3').each((_index, element) => {
         const key = $(element).text().trim()
         const value = $(element).next('td').text().trim()
         if (key) {
-          this.information[key] = value
+          this.originalInformation[key.replace(/:/g, '')] = value
         }
       })
     } catch (error) {
@@ -51,15 +51,15 @@ class ExtractAndTranslateContent {
   }
 
   async translate() {
-    await translate(JSON.stringify(this.information), {
+    await translate(JSON.stringify(this.originalInformation), {
       from: 'auto',
-      to: this.to,
+      to: this.to
     })
-      .then((res) => {
-        this.translatedInformation = res.text
+      .then((response) => {
+        this.translatedInformation = JSON.parse(response.text)
       })
-      .catch((err) => {
-        console.error(err)
+      .catch((error) => {
+        console.error(error)
         process.exit(1)
       })
   }

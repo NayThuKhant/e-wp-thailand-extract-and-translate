@@ -24,10 +24,6 @@ npm i -g e-workpermit-thailand-extractor
 
   ```php
   $output = json_decode(exec('e-workpermit-thailand-extractor [url] [to] --string'),true);
-
-  $originalInformation = json_decode($output['originalInformation'], true);
-
-  $translatedInformation = json_decode($output['translatedInformation'], true);
   ```
 
 - Node

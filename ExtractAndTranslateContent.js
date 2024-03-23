@@ -2,11 +2,22 @@ const axios = require('axios')
 const cheerio = require('cheerio')
 const translate = require('@iamtraction/google-translate')
 
-class extractAndTranslate {
+class ExtractAndTranslateContent {
   information = {}
   translatedInformation = {}
 
-  constructor(url) {
+  constructor(url, to) {
+    const urlRegex =
+      /^https:\/\/alien13febrenewal\.doe\.go\.th\/workpermit_dopa\?alien_key=[a-zA-Z0-9]+$/
+
+    if (!urlRegex.test(url)) {
+      console.error(
+        'Error: Invalid URL provided, make sure the URL is https://alien13febrenewal.doe.go.th/workpermit_dopa?alien_key=xxxxxx'
+      )
+      process.exit(1)
+    }
+
+    this.to = to ?? 'en'
     this.url = url
   }
 
@@ -35,33 +46,23 @@ class extractAndTranslate {
       })
     } catch (error) {
       console.error(error)
+      process.exit(1)
     }
   }
 
   async translate() {
     await translate(JSON.stringify(this.information), {
       from: 'auto',
-      to: 'en',
+      to: this.to,
     })
       .then((res) => {
         this.translatedInformation = res.text
       })
       .catch((err) => {
         console.error(err)
+        process.exit(1)
       })
   }
 }
 
-const run = async () => {
-  const url = process.argv[2]
-  if (!url) {
-    console.error('Please provide a URL as a command-line argument.')
-    process.exit(1)
-  }
-
-  const translatedInformation = await new extractAndTranslate(url).process()
-
-  console.log(JSON.stringify(translatedInformation))
-}
-
-run()
+module.exports = ExtractAndTranslateContent

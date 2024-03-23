@@ -7,7 +7,7 @@
 ### INSTALLATION
 
 ```bash
-  npm i -g e-wp-thailand-extract-and-translate
+  npm i -g e-workpermit-thailand-extractor
 ```
 
 ### USAGE
@@ -15,15 +15,15 @@
 - CLI
 
   ```bash
-    ep-wp-thitan-extract-and-translate --help
+    e-workpermit-thailand-extractor --help
 
-    e-wp-thailand-extract-and-translate [url] [to] --string
+    e-workpermit-thailand-extractor [url] [to] --string
   ```
 
   - Execute CLI using PHP
 
   ```php
-  $output = json_decode(exec('e-wp-thailand-extract-and-translate [url] [to] --string'),true);
+  $output = json_decode(exec('e-workpermit-thailand-extractor [url] [to] --string'),true);
   $originalInformation = json_decode($output['originalInformation'], true);
   $translatedInformation = json_decode($output['translatedInformation'], true);
   ```
@@ -39,4 +39,4 @@
 
 ### SAMPLE URL
 
-- https://alien13febrenewal.doe.go.th/workpermit_dopa?alien_key=63997b6710dd6
+- https://alien13febrenewal.doe.go.th/workpermit_dopa?alien_key=xxxxxxx (Where xxxxxxx is the alien key for the workpermit) - To get this url, you will need to scan the QR code on the workpermit card

@@ -5,14 +5,14 @@
     "cheerio": "^1.0.0-rc.12",
     "commander": "^12.0.0"
   },
-  "name": "e-wp-thailand-extract-and-translate",
-  "version": "1.0.1",
+  "name": "e-workpermit-thailand-extractor",
+  "version": "0.0.2",
   "engines": {
     "node": ">=14"
   },
   "description": "Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)",
   "bin": {
-    "e-wp-thailand-extract-and-translate": "cli.js"
+    "e-workpermit-thailand-extractor": "cli.js"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

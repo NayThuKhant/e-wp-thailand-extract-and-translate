@@ -10,6 +10,12 @@
   "engines": {
     "node": ">=14"
   },
+  "keywords": [
+    "E Work Permit Thailand",
+    "Extract",
+    "Translate",
+    "Work Permit Thailand"
+  ],
   "description": "Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)",
   "bin": {
     "e-workpermit-thailand-extractor": "cli.js"

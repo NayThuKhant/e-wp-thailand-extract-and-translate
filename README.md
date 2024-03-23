@@ -1,5 +1,9 @@
 #### Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)
 
+##### NOTE
+
+I do translate keys of the object from TH to another language using google translage and name of the keys may change, I do encourage you to use originalInformation key.
+
 ##### REQUIREMENTS
 
 Node.js ^14

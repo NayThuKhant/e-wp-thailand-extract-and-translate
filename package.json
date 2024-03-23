@@ -1,18 +1,19 @@
 {
-	"dependencies": {
-		"@iamtraction/google-translate": "^2.0.1",
-		"puppeteer": "^22.6.0"
-	},
-	"name": "e-wp-thailand-extract-and-translate",
-	"version": "1.0.0",
-	"engines": {
-		"node": ">=18"
-	},
-	"description": "Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)",
-	"main": "index.js",
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"author": "Nay Thu Khant",
-	"license": "ISC"
+  "dependencies": {
+    "@iamtraction/google-translate": "^2.0.1",
+    "axios": "^1.6.8",
+    "cheerio": "^1.0.0-rc.12"
+  },
+  "name": "e-wp-thailand-extract-and-translate",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=14"
+  },
+  "description": "Project to extract & translate employee information from Thailand Workpermit Website (https://alien13febrenewal.doe.go.th)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Nay Thu Khant",
+  "license": "ISC"
 }

@@ -1,47 +1,67 @@
-const puppeteer = require('puppeteer')
+const axios = require('axios')
+const cheerio = require('cheerio')
 const translate = require('@iamtraction/google-translate')
 
-async function extractInformation(url) {
-  const browser = await puppeteer.launch()
-  const page = await browser.newPage()
+class extractAndTranslate {
+  information = {}
+  translatedInformation = {}
 
-  await page.goto(url)
+  constructor(url) {
+    this.url = url
+  }
 
-  const information = await page.evaluate(() => {
-    const keyList = document.querySelectorAll('td.pe-3')
+  async process() {
+    await this.extract()
+    await this.translate()
 
-    const information = {}
+    return {
+      originalInformation: this.translatedInformation,
+      translatedInformation: this.translatedInformation,
+    }
+  }
 
-    keyList.forEach((key) => {
-      if (key.textContent) {
-        information[key.textContent.trim().replace(/[:\s]/g, '')] =
-          key.nextElementSibling?.textContent.trim()
-      }
+  async extract() {
+    try {
+      const response = await axios.get(this.url)
+      const html = response.data
+      const $ = cheerio.load(html)
+
+      $('td.pe-3').each((index, element) => {
+        const key = $(element).text().trim()
+        const value = $(element).next('td').text().trim()
+        if (key) {
+          this.information[key] = value
+        }
+      })
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  async translate() {
+    await translate(JSON.stringify(this.information), {
+      from: 'auto',
+      to: 'en',
     })
-
-    return information
-  })
-
-  await browser.close()
-  return information
+      .then((res) => {
+        this.translatedInformation = res.text
+      })
+      .catch((err) => {
+        console.error(err)
+      })
+  }
 }
 
-async function run() {
+const run = async () => {
   const url = process.argv[2]
   if (!url) {
     console.error('Please provide a URL as a command-line argument.')
     process.exit(1)
   }
 
-  const extractedInformation = await extractInformation(url)
+  const translatedInformation = await new extractAndTranslate(url).process()
 
-  translate(JSON.stringify(extractedInformation), { to: 'en' })
-    .then((res) => {
-      console.debug(res.text)
-    })
-    .catch((err) => {
-      console.error(err)
-    })
+  console.log(JSON.stringify(translatedInformation))
 }
 
 run()

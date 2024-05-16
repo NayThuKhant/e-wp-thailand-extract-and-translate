@@ -21,7 +21,6 @@ program
         url,
         to
       ).process()
-
       if (askingForStringOutput) {
         console.log(JSON.stringify(information))
       } else {

@@ -25,10 +25,11 @@ const versions =
           const key = $(element).text().trim();
           const value = $(element).next('td').text().trim();
           if (key) {
-            const index = this.fields.findIndex(k => key.includes(k));
-            if (index !== -1) {
-              this.originalInformation[this.fields[index]] = value;
-            }
+            this.originalInformation[key] = value;
+            // const index = this.fields.findIndex(k => key.includes(k));
+            // if (index !== -1) {
+            //   this.originalInformation[this.fields[index]] = value;
+            // }
           }
         });
         return this.originalInformation;
@@ -62,10 +63,11 @@ const versions =
           const key = keyElement.text().trim();
           const value = valueElement.text().trim();
           if (key) {
-            const index = this.fields.findIndex(k => key.includes(k));
-            if (index !== -1) {
-              this.originalInformation[this.fields[index]] = value;
-            }
+            this.originalInformation[key] = value;
+            // const index = this.fields.findIndex(k => key.includes(k));
+            // if (index !== -1) {
+            //   this.originalInformation[this.fields[index]] = value;
+            // }
           }
 
         });

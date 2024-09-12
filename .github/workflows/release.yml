@@ -1,0 +1,35 @@
+name: Automated NPM Release
+
+on:
+  push:
+    branches:
+      - master  # Trigger the workflow on merges to master branch
+
+jobs:
+  release:
+    runs-on: ubuntu-latest  # Use the latest Ubuntu image
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2  # Checkout your code
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'  # Specify the Node.js version you are using
+
+      - name: Install dependencies
+        run: npm install  # Install your package dependencies
+
+      - name: Automated releases for npm packages.
+        uses: mikeal/merge-release@v4.3.0  # Use the latest merge-release version
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Required to tag the version
+          NPM_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}  # Required to publish to npm
+          DEPLOY_DIR: ./dist  # Optional: Path to the package.json for npm publish, defaults to root
+          SRC_PACKAGE_DIR: ./src  # Optional: Path to the source package.json, defaults to root
+
+      - name: Publish to NPM
+        run: npm publish  # Publish to npm
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}  # Use npm auth token from GitHub Secrets

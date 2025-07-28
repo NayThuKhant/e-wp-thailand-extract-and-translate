@@ -41,8 +41,7 @@ class ExtractAndTranslateContent {
 
     return {
       originalInformation: this.originalInformation,
-      translatedInformation: this.translatedInformation,
-      version: this.version
+      translatedInformation: this.translatedInformation
     }
   }
 
